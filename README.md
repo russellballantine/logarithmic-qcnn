@@ -27,7 +27,7 @@ x = [x_0, x_1, \dots, x_{M-1}]^T \in \mathbb{R}^M where M \le 2^N
 ```
 the data is normalized such that 
 ```math
-\vert{}\x\vert{}_2 = 1
+\vert{}x\vert{}_2 = 1
 ```
 The state preparation unitary maps these normalized values directly to computational basis amplitudes:
 
