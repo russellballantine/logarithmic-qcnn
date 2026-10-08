@@ -23,9 +23,10 @@ Because an N-qubit system inherently possesses \(2^N\) complex amplitudes, featu
 Given an input vector 
 
 ```math
-\(x = [x_0, x_1, \dots, x_{M-1}]^T \in \mathbb{R}^M\) where \(M \le 2^N\) 
+\(x = [x_0, x_1, \dots, x_{M-1}]^T \in \mathbb{R}^M\) where \(M \le 2^N)\ 
 ```
-the data is normalized such that \(\vert{}\vert{}x\vert{}\vert{}_2 = 1\). The state preparation unitary maps these normalized values directly to computational basis amplitudes:
+the data is normalized such that ```math\(\vert{}\vert{}x\vert{}\vert{}_2 = 1\)```
+The state preparation unitary maps these normalized values directly to computational basis amplitudes:
 
 ```math
 
