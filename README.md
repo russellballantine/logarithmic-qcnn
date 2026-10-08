@@ -20,7 +20,12 @@ Because an N-qubit system inherently possesses \(2^N\) complex amplitudes, featu
 ## 🧮 Mathematical Formulation
 
 ### 1. State Superposition Injection
-Given an input vector ```math \(x = [x_0, x_1, \dots, x_{M-1}]^T \in \mathbb{R}^M\) where \(M \le 2^N\) ```, the data is normalized such that \(\vert{}\vert{}x\vert{}\vert{}_2 = 1\). The state preparation unitary maps these normalized values directly to computational basis amplitudes:
+Given an input vector 
+
+```math
+\(x = [x_0, x_1, \dots, x_{M-1}]^T \in \mathbb{R}^M\) where \(M \le 2^N\) 
+```
+the data is normalized such that \(\vert{}\vert{}x\vert{}\vert{}_2 = 1\). The state preparation unitary maps these normalized values directly to computational basis amplitudes:
 
 ```math
 
