@@ -14,6 +14,7 @@ Because an N-qubit system inherently possesses \(2^N\) complex amplitudes, featu
 * **High-Density Patching:** A 4-qubit register can now instantly ingest a full **4x4 spatial patch (16 pixel features)** in a single quantum operation, completely replacing the tight 2x2 bottleneck of the previous pipeline.
 * **Global Embedding Scalability:** If scaled up to an 8-qubit register (2⁸ = 256), the network can embed a complete **14x14 normalized image (196 features)** directly into the state vector, removing sliding-window constraints entirely.
 
+
 ---
 
 ## 🧮 Mathematical Formulation
@@ -30,6 +31,7 @@ qml.AmplitudeEmbedding(features=inputs, wires=range(4), normalize=True)
 ```
 
 ---
+
 
 ## 📁 Repository Structure Blueprint
 
