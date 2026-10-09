@@ -86,6 +86,7 @@ A sliding window approach utilizes an unfolding operation to scan the downsample
 * **Number of Patches (N):**
 ```math 
   W_{\text{out}} = \frac{14 - 4}{2} + 1 = 6 \implies N = 6 \times 6 = 36 \text{ patches}
+
 ```
 * **Flattened Features per Patch:** 4 × 4 = 16 values
 * **Resulting Output Tensor Shape:** `[36, 16]` per image.
@@ -94,12 +95,14 @@ A sliding window approach utilizes an unfolding operation to scan the downsample
 To satisfy the axiomatic unit-norm requirement of quantum mechanics, each flattened patch vector x must undergo strict L₂ normalization before state injection:
 ```math
 \hat{x} = \frac{x}{\Vert{}x\Vert{}_2} \quad \text{where} \quad \Vert{}x\Vert{}_2 = \sqrt{\sum_{i=0}^{15} \vert{}x_i\vert{}^2}
+
 ```
 
-*Safety Handling:* If a patch belongs to a completely uniform background (\(\Vert{}x\Vert{}_2 = 0\)), the norm is systematically clamped to 1.0 to prevent division-by-zero errors (`NaN` generation) in the PyTorch pipeline.
+*Safety Handling:* If a patch belongs to a completely uniform background the norm is systematically clamped to 1.0 to prevent division-by-zero errors (`NaN` generation) in the PyTorch pipeline.
 
 ### 4. State Injection
 Using `qml.AmplitudeEmbedding`, the 16 classical elements of each normalized patch vector x̂ are mapped directly to the probability amplitudes of a compact 4-qubit register (2⁴ = 16 basis states):
 ```math
-\(\vert{}\psi(x)\rangle = \sum_{i=0}^{15} \hat{x}_i \vert{}i\rangle\)
+\vert{}\psi(x)\rangle = \sum_{i=0}^{15} \hat{x}_i \vert{}i\rangle
+
 ```
