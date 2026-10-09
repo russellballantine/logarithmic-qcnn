@@ -77,21 +77,29 @@ Phase 2 replaces the 1-to-1 linear Angle Encoding of Phase 1 with high-density *
 
 ### 1. Spatial Pre-processing
 Classical images are downsampled to a fixed grid size of 14 × 14 pixels using a single grayscale channel:
-\[\mathbf{X}_{\text{raw}} \in \mathbb{R}^{14 \times 14}\]
+```math
+\mathbf{X}_{\text{raw}} \in \mathbb{R}^{14 \times 14}
+```
 
 ### 2. Patch Extraction & Dimensionality
 A sliding window approach utilizes an unfolding operation to scan the downsampled grid using a 4 × 4 spatial window and a stride of 2. 
-* **Number of Patches (N):** 
-  \[W_{\text{out}} = \frac{14 - 4}{2} + 1 = 6 \implies N = 6 \times 6 = 36 \text{ patches}\]
+* **Number of Patches (N):**
+```math 
+  W_{\text{out}} = \frac{14 - 4}{2} + 1 = 6 \implies N = 6 \times 6 = 36 \text{ patches}
+```
 * **Flattened Features per Patch:** 4 × 4 = 16 values
 * **Resulting Output Tensor Shape:** `[36, 16]` per image.
 
 ### 3. Rigid L₂ Normalization & Quantum Mapping
 To satisfy the axiomatic unit-norm requirement of quantum mechanics, each flattened patch vector x must undergo strict L₂ normalization before state injection:
-\[\hat{x} = \frac{x}{\Vert{}x\Vert{}_2} \quad \text{where} \quad \Vert{}x\Vert{}_2 = \sqrt{\sum_{i=0}^{15} \vert{}x_i\vert{}^2}\]
+```math
+\hat{x} = \frac{x}{\Vert{}x\Vert{}_2} \quad \text{where} \quad \Vert{}x\Vert{}_2 = \sqrt{\sum_{i=0}^{15} \vert{}x_i\vert{}^2}
+```
 
 *Safety Handling:* If a patch belongs to a completely uniform background (\(\Vert{}x\Vert{}_2 = 0\)), the norm is systematically clamped to 1.0 to prevent division-by-zero errors (`NaN` generation) in the PyTorch pipeline.
 
 ### 4. State Injection
 Using `qml.AmplitudeEmbedding`, the 16 classical elements of each normalized patch vector x̂ are mapped directly to the probability amplitudes of a compact 4-qubit register (2⁴ = 16 basis states):
-\[\vert{}\psi(x)\rangle = \sum_{i=0}^{15} \hat{x}_i \vert{}i\rangle\]
+```math
+\(\vert{}\psi(x)\rangle = \sum_{i=0}^{15} \hat{x}_i \vert{}i\rangle\)
+```
